@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using ContaBancaria.Entidades.Excecao;
 
 namespace ContaBancaria.Entidades
 {
@@ -26,6 +27,14 @@ namespace ContaBancaria.Entidades
         }
         public void Saque(double montante)
         {
+            if(montante > LimiteSaque)
+            {
+                throw new DominioExcecao("Ultrapassou o limite de saque! "); 
+            }
+            else if(montante > Saldo)
+            {
+                throw new DominioExcecao("Limite de saldo ultrapassado! ");
+            }
             Saldo -= montante;
         }
         public override string ToString()
